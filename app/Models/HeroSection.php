@@ -28,7 +28,7 @@ class HeroSection extends Model
 
 class HeroStatistic extends Model
 {
-    protected $fillable = ['hero_section_id', 'value', 'label_en', 'label_ar'];
+    protected $fillable = ['hero_section_id', 'value', 'label_en', 'label_ar', 'order'];
 
     public function heroSection(): BelongsTo
     {

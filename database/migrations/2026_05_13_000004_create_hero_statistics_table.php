@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('value');
             $table->string('label_en');
             $table->string('label_ar');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
