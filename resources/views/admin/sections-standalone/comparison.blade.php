@@ -69,9 +69,8 @@
                     <input type="text" name="items[{{ $i }}][text_en]" value="{{ $item->text_en }}" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Text EN">
                     <input type="text" name="items[{{ $i }}][text_ar]" value="{{ $item->text_ar }}" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Text AR" dir="rtl">
                     <select name="items[{{ $i }}][color]" class="border border-slate-300 rounded-lg px-3 py-2">
-                        <option value="branding" {{ $item->color == 'branding' ? 'selected' : '' }}>Branding</option>
-                        <option value="primary" {{ $item->color == 'primary' ? 'selected' : '' }}>Primary</option>
-                        <option value="green" {{ $item->color == 'green' ? 'selected' : '' }}>Green</option>
+                        <option value="red" {{ $item->color == 'red' ? 'selected' : '' }}>Without OMS</option>
+                        <option value="green" {{ $item->color == 'green' ? 'selected' : '' }}>With OMS</option>
                     </select>
                 </div>
             </div>
@@ -87,9 +86,8 @@
                         <input type="text" name="items[__INDEX__][text_en]" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Text EN">
                         <input type="text" name="items[__INDEX__][text_ar]" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Text AR" dir="rtl">
                         <select name="items[__INDEX__][color]" class="border border-slate-300 rounded-lg px-3 py-2">
-                            <option value="branding">Branding</option>
-                            <option value="primary">Primary</option>
-                            <option value="green">Green</option>
+                            <option value="red">Without OMS</option>
+                            <option value="green">With OMS</option>
                         </select>
                     </div>
                 </div>

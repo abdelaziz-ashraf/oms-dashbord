@@ -81,6 +81,12 @@
     </div>
 
     <div class="space-y-2">
+        <label class="block text-sm font-semibold text-slate-700">Sales WhatsApp Number</label>
+        <input type="text" name="whatsapp_number" value="{{ $landingPage->cta?->whatsapp_number }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" placeholder="+1234567890" dir="ltr">
+        <p class="text-xs text-slate-500">Used by the secondary CTA button, for example "Talk to Sales". Include the country code.</p>
+    </div>
+
+    <div class="space-y-2">
         <label class="block text-sm font-semibold text-slate-700">Badges (one per line - EN | AR)</label>
         <textarea name="badges_text" rows="4" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">{{ collect($landingPage->cta?->badges ?? [])->map(fn($badge) => ($badge['text_en'] ?? '') . ' | ' . ($badge['text_ar'] ?? ''))->join("\n") }}</textarea>
     </div>

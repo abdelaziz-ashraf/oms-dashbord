@@ -177,6 +177,23 @@
                 });
             });
 
+            document.querySelectorAll('.add-social-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const container = document.getElementById(this.dataset.target);
+                    const template = container?.querySelector('.item-template');
+
+                    if (!container || !template) {
+                        return;
+                    }
+
+                    const index = Array.from(container.children).filter(child => child.classList.contains('item-item')).length;
+                    const clone = template.content.cloneNode(true);
+                    const html = clone.querySelector('.item-item').outerHTML;
+                    const newHtml = html.replace(/__INDEX__/g, index);
+                    container.insertAdjacentHTML('beforeend', newHtml);
+                });
+            });
+
             document.addEventListener('click', function(e) {
                 if (e.target.classList.contains('remove-item-btn') || e.target.closest('.remove-item-btn')) {
                     const target = e.target.classList.contains('remove-item-btn') ? e.target : e.target.closest('.remove-item-btn');

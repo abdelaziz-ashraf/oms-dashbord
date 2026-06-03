@@ -255,6 +255,7 @@ class SectionController extends Controller
                 'eyebrow_en', 'eyebrow_ar', 'title_en', 'title_ar', 'description_en', 'description_ar',
                 'button_text_en', 'button_text_ar', 'button_link',
                 'secondary_button_text_en', 'secondary_button_text_ar', 'secondary_button_link',
+                'whatsapp_number',
             ]);
 
             $section->forceFill([
@@ -310,9 +311,17 @@ class SectionController extends Controller
                 ], fn (array $row) => filled($row['label_en'] ?? null));
             }
 
-            $this->syncChildren($section->socialLinks(), $request->validated('social_links') ?? [], [
+            $socialLinks = collect($request->validated('social_links') ?? [])
+                ->map(function (array $row): array {
+                    $row['platform'] = strtolower(trim((string) ($row['platform'] ?? '')));
+
+                    return $row;
+                })
+                ->all();
+
+            $this->syncChildren($section->socialLinks(), $socialLinks, [
                 'platform', 'url',
-            ], fn (array $row) => filled($row['platform'] ?? null));
+            ], fn (array $row) => filled($row['platform'] ?? null) && filled($row['url'] ?? null));
         });
 
         return back()->with('success', 'Footer section updated!');

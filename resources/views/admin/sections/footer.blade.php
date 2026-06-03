@@ -1,4 +1,12 @@
-<?php $section = $landingPage->footer; ?>
+<?php
+    $section = $landingPage->footer;
+    $socialPlatforms = [
+        'facebook' => 'Facebook',
+        'linkedin' => 'LinkedIn',
+        'instagram' => 'Instagram',
+        'tiktok' => 'TikTok',
+    ];
+?>
 <div id="footer" class="section-card bg-white rounded-xl shadow-sm p-6 mt-6 mb-8">
     <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-bold text-dark">Footer</h2>
@@ -55,7 +63,12 @@
             <div class="space-y-2" id="sociallinks-container">
                 @foreach($section?->socialLinks ?? [] as $i => $link)
                 <div class="flex gap-2 items-center">
-                    <input type="text" name="social_links[{{ $i }}][platform]" value="{{ $link->platform }}" class="border rounded px-2 py-1 w-32" placeholder="Platform">
+                    <select name="social_links[{{ $i }}][platform]" class="border rounded px-2 py-1 w-40 bg-white">
+                        <option value="">Select platform</option>
+                        @foreach($socialPlatforms as $platform => $label)
+                            <option value="{{ $platform }}" @selected(strtolower((string) $link->platform) === $platform)>{{ $label }}</option>
+                        @endforeach
+                    </select>
                     <input type="text" name="social_links[{{ $i }}][url]" value="{{ $link->url }}" class="border rounded px-2 py-1 flex-1" placeholder="URL">
                     <button type="button" class="text-red-500" onclick="this.parentElement.remove()">×</button>
                 </div>
@@ -115,7 +128,12 @@ function addLink(btn) {
 function addSocialLink() {
     document.getElementById('sociallinks-container').insertAdjacentHTML('beforeend', `
         <div class="flex gap-2 items-center">
-            <input type="text" name="social_links[${slIndex}][platform]" class="border rounded px-2 py-1 w-32" placeholder="Platform">
+            <select name="social_links[${slIndex}][platform]" class="border rounded px-2 py-1 w-40 bg-white">
+                <option value="">Select platform</option>
+                @foreach($socialPlatforms as $platform => $label)
+                    <option value="{{ $platform }}">{{ $label }}</option>
+                @endforeach
+            </select>
             <input type="text" name="social_links[${slIndex}][url]" class="border rounded px-2 py-1 flex-1" placeholder="URL">
             <button type="button" class="text-red-500" onclick="this.parentElement.remove()">×</button>
         </div>

@@ -21,6 +21,7 @@ class CtaSection extends Model
         'secondary_button_text_en',
         'secondary_button_text_ar',
         'secondary_button_link',
+        'whatsapp_number',
         'badges',
         'is_active',
     ];

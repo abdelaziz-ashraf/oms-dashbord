@@ -23,6 +23,7 @@
             <div><label class="block text-sm font-medium mb-1">Button Text (AR)</label><input type="text" name="button_text_ar" value="{{ $section?->button_text_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
         </div>
         <div><label class="block text-sm font-medium mb-1">Button Link</label><input type="text" name="button_link" value="{{ $section?->button_link }}" class="w-full border rounded-lg px-3 py-2"></div>
+        <div><label class="block text-sm font-medium mb-1">Sales WhatsApp Number</label><input type="text" name="whatsapp_number" value="{{ $section?->whatsapp_number }}" class="w-full border rounded-lg px-3 py-2" placeholder="+1234567890" dir="ltr"></div>
         <button type="submit" class="px-4 py-2 bg-branding text-white rounded-lg hover:opacity-90">Save Changes</button>
     </form>
 </div>

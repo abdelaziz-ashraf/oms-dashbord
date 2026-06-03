@@ -214,6 +214,8 @@ class LandingPageResource extends JsonResource
             'secondary_button_text_en' => $section->secondary_button_text_en,
             'secondary_button_text_ar' => $section->secondary_button_text_ar,
             'secondary_button_link' => $section->secondary_button_link,
+            'whatsapp_number' => $section->whatsapp_number,
+            'whatsapp_url' => $this->whatsappUrl($section->whatsapp_number),
             'badges' => $section->badges ?? [],
         ];
     }
@@ -329,5 +331,16 @@ class LandingPageResource extends JsonResource
         }
 
         return url(Storage::disk('public')->url($path));
+    }
+
+    private function whatsappUrl(?string $number): ?string
+    {
+        $digits = preg_replace('/\D+/', '', (string) $number);
+
+        if (!$digits) {
+            return null;
+        }
+
+        return "https://wa.me/{$digits}";
     }
 }

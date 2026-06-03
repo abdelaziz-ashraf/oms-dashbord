@@ -43,6 +43,7 @@ class SectionRequest extends FormRequest
                 'secondary_button_text_en' => ['nullable', 'string'],
                 'secondary_button_text_ar' => ['nullable', 'string'],
                 'secondary_button_link' => ['nullable', 'string', 'max:2048'],
+                'whatsapp_number' => ['nullable', 'string', 'max:32'],
                 'badges_text' => ['nullable', 'string'],
                 'is_active' => ['nullable', 'boolean'],
             ],
@@ -169,7 +170,7 @@ class SectionRequest extends FormRequest
             'items.*.icon' => ['nullable', 'string'],
             'items.*.text_en' => ['nullable', 'string'],
             'items.*.text_ar' => ['nullable', 'string'],
-            'items.*.color' => ['nullable', 'string'],
+            'items.*.color' => ['nullable', 'string', 'in:red,green'],
         ];
     }
 
@@ -242,7 +243,7 @@ class SectionRequest extends FormRequest
             'link_groups.*.links.*.url' => ['nullable', 'string', 'max:2048'],
             'social_links' => ['nullable', 'array'],
             'social_links.*.id' => ['nullable', 'integer'],
-            'social_links.*.platform' => ['nullable', 'string'],
+            'social_links.*.platform' => ['nullable', 'string', 'in:facebook,linkedin,instagram,tiktok'],
             'social_links.*.url' => ['nullable', 'string', 'max:2048'],
         ];
     }

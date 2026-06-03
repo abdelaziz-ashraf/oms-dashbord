@@ -1,4 +1,12 @@
-<?php $section = $landingPage->footer; ?>
+<?php
+    $section = $landingPage->footer;
+    $socialPlatforms = [
+        'facebook' => 'Facebook',
+        'linkedin' => 'LinkedIn',
+        'instagram' => 'Instagram',
+        'tiktok' => 'TikTok',
+    ];
+?>
 <form action="{{ route('admin.footer.update') }}" method="POST" class="space-y-6">
     @csrf @method('PUT')
     
@@ -103,14 +111,24 @@
             @foreach($section?->socialLinks ?? [] as $i => $link)
             <div class="flex gap-4 items-center p-4 bg-slate-50 rounded-xl border border-slate-200 item-item">
                 <input type="hidden" name="social_links[{{ $i }}][id]" value="{{ $link->id }}">
-                <input type="text" name="social_links[{{ $i }}][platform]" value="{{ $link->platform }}" class="border border-slate-300 rounded-lg px-3 py-2 w-40" placeholder="Platform (e.g., facebook)">
+                <select name="social_links[{{ $i }}][platform]" class="border border-slate-300 rounded-lg px-3 py-2 w-44 bg-white">
+                    <option value="">Select platform</option>
+                    @foreach($socialPlatforms as $platform => $label)
+                        <option value="{{ $platform }}" @selected(strtolower((string) $link->platform) === $platform)>{{ $label }}</option>
+                    @endforeach
+                </select>
                 <input type="text" name="social_links[{{ $i }}][url]" value="{{ $link->url }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="URL">
                 <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>
             </div>
             @endforeach
             <template class="item-template hidden">
                 <div class="flex gap-4 items-center p-4 bg-slate-50 rounded-xl border border-slate-200 item-item">
-                    <input type="text" name="social_links[__INDEX__][platform]" class="border border-slate-300 rounded-lg px-3 py-2 w-40" placeholder="Platform (e.g., facebook)">
+                    <select name="social_links[__INDEX__][platform]" class="border border-slate-300 rounded-lg px-3 py-2 w-44 bg-white">
+                        <option value="">Select platform</option>
+                        @foreach($socialPlatforms as $platform => $label)
+                            <option value="{{ $platform }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
                     <input type="text" name="social_links[__INDEX__][url]" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="URL">
                     <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>
                 </div>

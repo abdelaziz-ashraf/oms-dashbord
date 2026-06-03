@@ -14,6 +14,16 @@
             <div><label class="block text-sm font-medium mb-1">Title (EN)</label><input type="text" name="title_en" value="{{ $section?->title_en }}" class="w-full border rounded-lg px-3 py-2"></div>
             <div><label class="block text-sm font-medium mb-1">Title (AR)</label><input type="text" name="title_ar" value="{{ $section?->title_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
         </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div><label class="block text-sm font-medium mb-1">Without OMS Title (EN)</label><input type="text" name="before_title_en" value="{{ $section?->before_title_en }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">Without OMS Title (AR)</label><input type="text" name="before_title_ar" value="{{ $section?->before_title_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">Without OMS Subtitle (EN)</label><input type="text" name="before_subtitle_en" value="{{ $section?->before_subtitle_en }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">Without OMS Subtitle (AR)</label><input type="text" name="before_subtitle_ar" value="{{ $section?->before_subtitle_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">With OMS Title (EN)</label><input type="text" name="after_title_en" value="{{ $section?->after_title_en }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">With OMS Title (AR)</label><input type="text" name="after_title_ar" value="{{ $section?->after_title_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">With OMS Subtitle (EN)</label><input type="text" name="after_subtitle_en" value="{{ $section?->after_subtitle_en }}" class="w-full border rounded-lg px-3 py-2"></div>
+            <div><label class="block text-sm font-medium mb-1">With OMS Subtitle (AR)</label><input type="text" name="after_subtitle_ar" value="{{ $section?->after_subtitle_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
+        </div>
         <div class="border-t pt-4">
             <h3 class="font-medium mb-3">Items</h3>
             <div class="space-y-3" id="comparison-container">
@@ -23,9 +33,8 @@
                     <input type="text" name="items[{{ $i }}][text_en]" value="{{ $item->text_en }}" class="border rounded px-2 py-1 flex-1" placeholder="Text EN">
                     <input type="text" name="items[{{ $i }}][text_ar]" value="{{ $item->text_ar }}" class="border rounded px-2 py-1 flex-1" placeholder="Text AR">
                     <select name="items[{{ $i }}][color]" class="border rounded px-2 py-1">
-                        <option value="branding" {{ $item->color == 'branding' ? 'selected' : '' }}>Branding</option>
-                        <option value="primary" {{ $item->color == 'primary' ? 'selected' : '' }}>Primary</option>
-                        <option value="green" {{ $item->color == 'green' ? 'selected' : '' }}>Green</option>
+                        <option value="red" {{ $item->color == 'red' ? 'selected' : '' }}>Without OMS</option>
+                        <option value="green" {{ $item->color == 'green' ? 'selected' : '' }}>With OMS</option>
                     </select>
                     <button type="button" class="text-red-500" onclick="this.parentElement.remove()">×</button>
                 </div>
@@ -36,4 +45,4 @@
         <button type="submit" class="px-4 py-2 bg-branding text-white rounded-lg hover:opacity-90">Save Changes</button>
     </form>
 </div>
-<script>let compIndex = {{ $section?->items->count() ?? 0 }}; function addComparisonItem() { document.getElementById('comparison-container').insertAdjacentHTML('beforeend', `<div class="flex gap-2 items-center p-3 bg-gray-50 rounded-lg"><input type="text" name="items[${compIndex}][icon]" class="border rounded px-2 py-1 w-20" placeholder="Icon"><input type="text" name="items[${compIndex}][text_en]" class="border rounded px-2 py-1 flex-1" placeholder="Text EN"><input type="text" name="items[${compIndex}][text_ar]" class="border rounded px-2 py-1 flex-1" placeholder="Text AR"><select name="items[${compIndex}][color]" class="border rounded px-2 py-1"><option value="branding">Branding</option><option value="primary">Primary</option><option value="green">Green</option></select><button type="button" class="text-red-500" onclick="this.parentElement.remove()">×</button></div>`); compIndex++; }</script>
+<script>let compIndex = {{ $section?->items->count() ?? 0 }}; function addComparisonItem() { document.getElementById('comparison-container').insertAdjacentHTML('beforeend', `<div class="flex gap-2 items-center p-3 bg-gray-50 rounded-lg"><input type="text" name="items[${compIndex}][icon]" class="border rounded px-2 py-1 w-20" placeholder="Icon"><input type="text" name="items[${compIndex}][text_en]" class="border rounded px-2 py-1 flex-1" placeholder="Text EN"><input type="text" name="items[${compIndex}][text_ar]" class="border rounded px-2 py-1 flex-1" placeholder="Text AR"><select name="items[${compIndex}][color]" class="border rounded px-2 py-1"><option value="red">Without OMS</option><option value="green">With OMS</option></select><button type="button" class="text-red-500" onclick="this.parentElement.remove()">×</button></div>`); compIndex++; }</script>

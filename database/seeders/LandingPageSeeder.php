@@ -73,7 +73,7 @@ class LandingPageSeeder extends Seeder
             'subtitle_ar' => 'الحل الشامل لإدارة عقودك وعملائك وإيراداتك في مكان واحد.',
             'button_text_en' => 'Start Free Trial',
             'button_text_ar' => 'ابدأ التجربة المجانية',
-            'button_link' => '#packages',
+            'button_link' => '#contact',
             'secondary_button_text_en' => 'Watch Demo',
             'secondary_button_text_ar' => 'شاهد الفيديو',
             'secondary_button_link' => '#how-it-works',
@@ -188,10 +188,11 @@ class LandingPageSeeder extends Seeder
             'description_ar' => 'انضم إلى آلاف الشركات التي تستخدم OMS بالفعل',
             'button_text_en' => 'Start Free Trial',
             'button_text_ar' => 'ابدأ التجربة المجانية',
-            'button_link' => '#packages',
+            'button_link' => '#contact',
             'secondary_button_text_en' => 'Talk to Sales',
             'secondary_button_text_ar' => 'تحدث مع المبيعات',
             'secondary_button_link' => '#contact',
+            'whatsapp_number' => '+1234567890',
             'badges' => [
                 ['text_en' => 'No credit card required', 'text_ar' => 'لا بطاقة ائتمان مطلوبة'],
                 ['text_en' => '14-day free trial', 'text_ar' => '14 يوماً تجربة مجانية'],
@@ -311,7 +312,7 @@ class LandingPageSeeder extends Seeder
             ['title_en' => 'Easy to Use', 'title_ar' => 'سهل الاستخدام', 'description_en' => 'Intuitive interface that your team will love', 'description_ar' => 'واجهة بديهية سيحبها فريقك', 'icon' => 'star', 'order' => 0],
             ['title_en' => 'Secure', 'title_ar' => 'آمن', 'description_en' => 'Bank-level security to protect your data', 'description_ar' => 'أمان على مستوى البنوك لحماية بياناتك', 'icon' => 'shield-check', 'order' => 1],
             ['title_en' => 'Scalable', 'title_ar' => 'قابل للتطوير', 'description_en' => 'Grows with your business', 'description_ar' => 'ينمو مع عملك', 'icon' => 'trending-up', 'order' => 2],
-            ['title_en' => '24/7 Support', 'title_ar' => 'دعم على مدار الساعة', 'description_en' => 'Round-the-clock assistance when you need it', 'description_ar' => 'مساعدة مستمرة عندما تحتاج إليها', 'icon' => 'phone', 'order' => 3],
+            ['title_en' => 'Dedicated Support', 'title_ar' => 'دعم مخصص', 'description_en' => 'Responsive assistance when you need it', 'description_ar' => 'مساعدة مستمرة عندما تحتاج إليها', 'icon' => 'phone', 'order' => 3],
         ]);
 
         $howItWorks = HowItWorksSection::create([
@@ -359,10 +360,14 @@ class LandingPageSeeder extends Seeder
             'is_active' => true,
         ]);
         $comparison->items()->createMany([
-            ['text_en' => 'All-in-one solution', 'text_ar' => 'حل شامل', 'icon' => 'check-circle', 'color' => 'green', 'order' => 0],
-            ['text_en' => 'No hidden fees', 'text_ar' => 'بدون رسوم مخفية', 'icon' => 'check-circle', 'color' => 'green', 'order' => 1],
-            ['text_en' => 'Free onboarding', 'text_ar' => 'إعداد مجاني', 'icon' => 'check-circle', 'color' => 'green', 'order' => 2],
-            ['text_en' => 'Cancel anytime', 'text_ar' => 'إلغاء في أي وقت', 'icon' => 'check-circle', 'color' => 'green', 'order' => 3],
+            ['text_en' => 'Scattered tools', 'text_ar' => 'أدوات متفرقة', 'icon' => 'x-circle', 'color' => 'red', 'order' => 0],
+            ['text_en' => 'Manual follow-up', 'text_ar' => 'متابعة يدوية', 'icon' => 'x-circle', 'color' => 'red', 'order' => 1],
+            ['text_en' => 'Missed renewals', 'text_ar' => 'تجديدات فائتة', 'icon' => 'x-circle', 'color' => 'red', 'order' => 2],
+            ['text_en' => 'Limited visibility', 'text_ar' => 'رؤية محدودة', 'icon' => 'x-circle', 'color' => 'red', 'order' => 3],
+            ['text_en' => 'All-in-one solution', 'text_ar' => 'حل شامل', 'icon' => 'check-circle', 'color' => 'green', 'order' => 4],
+            ['text_en' => 'No hidden fees', 'text_ar' => 'بدون رسوم مخفية', 'icon' => 'check-circle', 'color' => 'green', 'order' => 5],
+            ['text_en' => 'Free onboarding', 'text_ar' => 'إعداد مجاني', 'icon' => 'check-circle', 'color' => 'green', 'order' => 6],
+            ['text_en' => 'Cancel anytime', 'text_ar' => 'إلغاء في أي وقت', 'icon' => 'check-circle', 'color' => 'green', 'order' => 7],
         ]);
 
         $contact = ContactSection::create([
@@ -444,9 +449,10 @@ class LandingPageSeeder extends Seeder
             ['label_en' => 'Careers', 'label_ar' => 'وظائف', 'url' => '#', 'order' => 2],
         ]);
 
-        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'twitter', 'url' => 'https://twitter.com/oms']);
-        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'linkedin', 'url' => 'https://linkedin.com/company/oms']);
-        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'facebook', 'url' => 'https://facebook.com/oms']);
+        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'facebook', 'url' => 'https://facebook.com/oms', 'order' => 0]);
+        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'linkedin', 'url' => 'https://linkedin.com/company/oms', 'order' => 1]);
+        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'instagram', 'url' => 'https://instagram.com/oms', 'order' => 2]);
+        SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'tiktok', 'url' => 'https://www.tiktok.com/@oms', 'order' => 3]);
 
         foreach ([
             ['services', 'Services', 'الخدمات', 'Core capabilities managed from the dashboard.', 'الخدمات الأساسية المدارة من لوحة التحكم', 0],
