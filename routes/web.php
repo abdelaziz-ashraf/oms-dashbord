@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\LandingPageController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +39,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/admin/cta', [SectionController::class, 'updateCta'])->name('admin.cta.update');
     Route::put('/admin/contact', [SectionController::class, 'updateContact'])->name('admin.contact.update');
     Route::put('/admin/footer', [SectionController::class, 'updateFooter'])->name('admin.footer.update');
+
+    Route::get('/admin/contact-messages', [ContactMessageController::class, 'index'])->name('admin.contact-messages.index');
+    Route::get('/admin/contact-messages/export', [ContactMessageController::class, 'export'])->name('admin.contact-messages.export');
+    Route::get('/admin/contact-messages/{contactMessage}', [ContactMessageController::class, 'show'])->name('admin.contact-messages.show');
+    Route::post('/admin/contact-messages/{contactMessage}/reply', [ContactMessageController::class, 'reply'])->name('admin.contact-messages.reply');
+    Route::patch('/admin/contact-messages/{contactMessage}/status', [ContactMessageController::class, 'updateStatus'])->name('admin.contact-messages.status');
+    Route::delete('/admin/contact-messages/{contactMessage}', [ContactMessageController::class, 'destroy'])->name('admin.contact-messages.destroy');
+
+    Route::get('/admin/portfolio/{module}', [PortfolioController::class, 'index'])->name('admin.portfolio.index');
+    Route::put('/admin/portfolio/{module}/settings', [PortfolioController::class, 'updateSettings'])->name('admin.portfolio.settings');
+    Route::post('/admin/portfolio/{module}', [PortfolioController::class, 'store'])->name('admin.portfolio.store');
+    Route::put('/admin/portfolio/{module}/{id}', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
+    Route::delete('/admin/portfolio/{module}/{id}', [PortfolioController::class, 'destroy'])->name('admin.portfolio.destroy');
 });
 
 require __DIR__.'/auth.php';

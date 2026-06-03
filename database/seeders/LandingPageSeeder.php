@@ -31,6 +31,7 @@ use App\Models\FooterSection;
 use App\Models\FooterLinkGroup;
 use App\Models\FooterLink;
 use App\Models\SocialLink;
+use App\Models\PortfolioSection;
 use Illuminate\Database\Seeder;
 
 class LandingPageSeeder extends Seeder
@@ -41,9 +42,20 @@ class LandingPageSeeder extends Seeder
             ['slug' => 'oms'],
             ['name' => 'OMS Landing Page', 'logo_text_en' => 'OMS', 'logo_text_ar' => 'OMS', 'is_announcement_active' => true]
         );
-        
-        // Delete existing items to re-seed cleanly
-        $page->problem?->items()?->delete();
+
+        foreach ([
+            'announcement', 'hero', 'problem', 'features', 'packages',
+            'targetAudience', 'socialProof', 'whyUs', 'howItWorks',
+            'comparison', 'faq', 'cta', 'contact', 'footer',
+        ] as $relation) {
+            $page->{$relation}()?->delete();
+        }
+
+        $page->forceFill([
+            'logo_text_en' => 'OMS',
+            'logo_text_ar' => 'OMS',
+            'is_announcement_active' => true,
+        ])->save();
 
         Announcement::create([
             'landing_page_id' => $page->id,
@@ -76,6 +88,8 @@ class LandingPageSeeder extends Seeder
 
         $packages = PackagesSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Pricing',
+            'eyebrow_ar' => 'الأسعار',
             'title_en' => 'Simple, Transparent Pricing',
             'title_ar' => 'تسعير بسيط وشفاف',
             'description_en' => 'Choose the plan that fits your business needs',
@@ -117,6 +131,7 @@ class LandingPageSeeder extends Seeder
             'price' => 79,
             'button_text_en' => 'Get Started',
             'button_text_ar' => 'ابدأ الآن',
+            'is_popular' => true,
             'order' => 1,
         ]);
         $pro->features()->createMany([
@@ -148,6 +163,8 @@ class LandingPageSeeder extends Seeder
 
         $faq = FaqSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'FAQ',
+            'eyebrow_ar' => 'الأسئلة الشائعة',
             'title_en' => 'Frequently Asked Questions',
             'title_ar' => 'الأسئلة الشائعة',
             'description_en' => 'Everything you need to know about our platform',
@@ -163,6 +180,8 @@ class LandingPageSeeder extends Seeder
 
         CtaSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Start Your Free Trial Today',
+            'eyebrow_ar' => 'ابدأ تجربتك المجانية اليوم',
             'title_en' => 'Ready to Get Started?',
             'title_ar' => 'هل أنت مستعد للبدء؟',
             'description_en' => 'Join thousands of businesses already using OMS',
@@ -170,11 +189,21 @@ class LandingPageSeeder extends Seeder
             'button_text_en' => 'Start Free Trial',
             'button_text_ar' => 'ابدأ التجربة المجانية',
             'button_link' => '#packages',
+            'secondary_button_text_en' => 'Talk to Sales',
+            'secondary_button_text_ar' => 'تحدث مع المبيعات',
+            'secondary_button_link' => '#contact',
+            'badges' => [
+                ['text_en' => 'No credit card required', 'text_ar' => 'لا بطاقة ائتمان مطلوبة'],
+                ['text_en' => '14-day free trial', 'text_ar' => '14 يوماً تجربة مجانية'],
+                ['text_en' => 'Cancel anytime', 'text_ar' => 'إلغاء في أي وقت'],
+            ],
             'is_active' => true,
         ]);
 
         $problem = ProblemSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'The Problem',
+            'eyebrow_ar' => 'المشكلة',
             'title_en' => 'The Problem',
             'title_ar' => 'المشكلة',
             'description_en' => 'Managing business operations manually is inefficient and error-prone. Spreadsheets, disconnected systems, and manual processes slow down growth and create costly mistakes.',
@@ -190,6 +219,8 @@ class LandingPageSeeder extends Seeder
 
         $features = FeaturesSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Features',
+            'eyebrow_ar' => 'الميزات',
             'title_en' => 'Powerful Features',
             'title_ar' => 'ميزات قوية',
             'description_en' => 'Everything you need to manage your business in one place',
@@ -205,6 +236,8 @@ class LandingPageSeeder extends Seeder
 
         $audience = TargetAudience::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Perfect For',
+            'eyebrow_ar' => 'مثالي لـ',
             'title_en' => 'Who Is This For?',
             'title_ar' => 'لمن هذا؟',
             'description_en' => 'Perfect for businesses of all sizes',
@@ -250,6 +283,8 @@ class LandingPageSeeder extends Seeder
 
         $socialProof = SocialProof::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Social Proof',
+            'eyebrow_ar' => 'شهادات العملاء',
             'title_en' => 'Trusted by Industry Leaders',
             'title_ar' => 'موثوق من قادة الصناعة',
             'description_en' => 'Join thousands of satisfied customers',
@@ -264,6 +299,8 @@ class LandingPageSeeder extends Seeder
 
         $whyUs = WhyUsSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Why Choose Us',
+            'eyebrow_ar' => 'لماذا تختارنا',
             'title_en' => 'Why Choose Us',
             'title_ar' => 'لماذا تختارنا',
             'description_en' => 'What sets us apart from the competition',
@@ -279,10 +316,22 @@ class LandingPageSeeder extends Seeder
 
         $howItWorks = HowItWorksSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'How It Works',
+            'eyebrow_ar' => 'كيف يعمل',
             'title_en' => 'How It Works',
             'title_ar' => 'كيف يعمل',
             'description_en' => 'Get started in minutes',
             'description_ar' => 'ابدأ في دقائق',
+            'cta_title_en' => 'See OMS in Action',
+            'cta_title_ar' => 'شاهد OMS أثناء العمل',
+            'cta_description_en' => 'Watch our 5-minute demo to see how OMS can transform your operations.',
+            'cta_description_ar' => 'شاهد عرضنا التوضيحي لمدة 5 دقائق.',
+            'cta_button_text_en' => 'Watch Demo',
+            'cta_button_text_ar' => 'شاهد العرض',
+            'cta_button_link' => '#contact',
+            'cta_secondary_button_text_en' => 'Read Documentation',
+            'cta_secondary_button_text_ar' => 'اقرأ التوثيق',
+            'cta_secondary_button_link' => '#faq',
             'is_active' => true,
         ]);
         $howItWorks->steps()->createMany([
@@ -293,10 +342,20 @@ class LandingPageSeeder extends Seeder
 
         $comparison = ComparisonSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Comparison',
+            'eyebrow_ar' => 'مقارنة',
             'title_en' => 'Why OMS Wins',
             'title_ar' => 'لماذا OMS يفوز',
             'description_en' => 'See how we compare to alternatives',
             'description_ar' => 'انظر كيف نقارن بالبدائل',
+            'before_title_en' => 'Without OMS',
+            'before_title_ar' => 'بدون النظام',
+            'before_subtitle_en' => 'The old way',
+            'before_subtitle_ar' => 'الطريقة القديمة',
+            'after_title_en' => 'With OMS',
+            'after_title_ar' => 'مع النظام',
+            'after_subtitle_en' => 'The smart way',
+            'after_subtitle_ar' => 'الطريقة الذكية',
             'is_active' => true,
         ]);
         $comparison->items()->createMany([
@@ -308,10 +367,40 @@ class LandingPageSeeder extends Seeder
 
         $contact = ContactSection::create([
             'landing_page_id' => $page->id,
+            'eyebrow_en' => 'Contact Us',
+            'eyebrow_ar' => 'اتصل بنا',
             'title_en' => 'Get in Touch',
             'title_ar' => 'تواصل معنا',
             'description_en' => 'We are here to help',
             'description_ar' => 'نحن هنا لمساعدتك',
+            'form_title_en' => 'Get Started Today',
+            'form_title_ar' => 'ابدأ اليوم',
+            'form_description_en' => 'Enter your email and we will send you a quick start guide.',
+            'form_description_ar' => 'أدخل بريدك الإلكتروني وسنرسل لك دليلاً سريعاً للبدء.',
+            'form_button_text_en' => 'Get Free Consultation',
+            'form_button_text_ar' => 'احصل على استشارة مجانية',
+            'form_success_text_en' => 'Sent Successfully!',
+            'form_success_text_ar' => 'تم الإرسال بنجاح!',
+            'form_error_text_en' => 'Could not send your message. Please try again.',
+            'form_error_text_ar' => 'تعذر إرسال الرسالة. حاول مرة أخرى.',
+            'form_sending_text_en' => 'Sending...',
+            'form_sending_text_ar' => 'جار الإرسال...',
+            'form_name_label_en' => 'Full Name',
+            'form_name_label_ar' => 'الاسم الكامل',
+            'form_name_placeholder_en' => 'Your name',
+            'form_name_placeholder_ar' => 'اسمك',
+            'form_email_label_en' => 'Email Address',
+            'form_email_label_ar' => 'البريد الإلكتروني',
+            'form_email_placeholder_en' => 'your@email.com',
+            'form_email_placeholder_ar' => 'your@email.com',
+            'form_company_label_en' => 'Company Name',
+            'form_company_label_ar' => 'اسم الشركة',
+            'form_company_placeholder_en' => 'Your company',
+            'form_company_placeholder_ar' => 'شركتك',
+            'form_badges' => [
+                ['text_en' => 'No spam', 'text_ar' => 'لا بريد عشوائي'],
+                ['text_en' => 'Free consultation', 'text_ar' => 'استشارة مجانية'],
+            ],
             'is_active' => true,
         ]);
         $contact->items()->createMany([
@@ -358,5 +447,28 @@ class LandingPageSeeder extends Seeder
         SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'twitter', 'url' => 'https://twitter.com/oms']);
         SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'linkedin', 'url' => 'https://linkedin.com/company/oms']);
         SocialLink::create(['footer_section_id' => $footer->id, 'platform' => 'facebook', 'url' => 'https://facebook.com/oms']);
+
+        foreach ([
+            ['services', 'Services', 'الخدمات', 'Core capabilities managed from the dashboard.', 'الخدمات الأساسية المدارة من لوحة التحكم', 0],
+            ['projects', 'Projects', 'المشاريع', 'Selected work and implementations.', 'أعمال وتطبيقات مختارة', 1],
+            ['case-studies', 'Case Studies', 'دراسات الحالة', 'Detailed stories behind delivered results.', 'قصص تفصيلية للنتائج المنجزة', 2],
+            ['team', 'Team', 'الفريق', 'People behind the product and delivery.', 'الفريق وراء المنتج والتنفيذ', 3],
+            ['testimonials', 'Testimonials', 'آراء العملاء', 'Client feedback and outcomes.', 'آراء العملاء والنتائج', 4],
+            ['clients', 'Clients', 'العملاء', 'Organizations that trust the team.', 'جهات تثق بالفريق', 5],
+            ['blog', 'Blog', 'المدونة', 'Latest articles and updates.', 'أحدث المقالات والتحديثات', 6],
+        ] as [$module, $titleEn, $titleAr, $descriptionEn, $descriptionAr, $order]) {
+            PortfolioSection::updateOrCreate(
+                ['module' => $module],
+                [
+                    'title_en' => $titleEn,
+                    'title_ar' => $titleAr,
+                    'description_en' => $descriptionEn,
+                    'description_ar' => $descriptionAr,
+                    'is_active' => true,
+                    'order' => $order,
+                    'limit' => 6,
+                ]
+            );
+        }
     }
 }

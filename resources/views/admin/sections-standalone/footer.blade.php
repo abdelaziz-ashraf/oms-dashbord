@@ -48,6 +48,7 @@
         <div class="space-y-4" id="linkgroups-container">
             @foreach($section?->linkGroups ?? [] as $gIndex => $group)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="link_groups[{{ $gIndex }}][id]" value="{{ $group->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700">Group {{ $gIndex + 1 }}</span>
                     <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>
@@ -60,6 +61,7 @@
                 <div class="pl-4 border-l-2 border-slate-300 space-y-2">
                     @foreach($group->links as $lIndex => $link)
                     <div class="flex gap-2 items-center item-item">
+                        <input type="hidden" name="link_groups[{{ $gIndex }}][links][{{ $lIndex }}][id]" value="{{ $link->id }}">
                         <input type="text" name="link_groups[{{ $gIndex }}][links][{{ $lIndex }}][label_en]" value="{{ $link->label_en }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Label EN">
                         <input type="text" name="link_groups[{{ $gIndex }}][links][{{ $lIndex }}][label_ar]" value="{{ $link->label_ar }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Label AR" dir="rtl">
                         <input type="text" name="link_groups[{{ $gIndex }}][links][{{ $lIndex }}][url]" value="{{ $link->url }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="URL">
@@ -100,6 +102,7 @@
         <div class="space-y-4" id="sociallinks-container">
             @foreach($section?->socialLinks ?? [] as $i => $link)
             <div class="flex gap-4 items-center p-4 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="social_links[{{ $i }}][id]" value="{{ $link->id }}">
                 <input type="text" name="social_links[{{ $i }}][platform]" value="{{ $link->platform }}" class="border border-slate-300 rounded-lg px-3 py-2 w-40" placeholder="Platform (e.g., facebook)">
                 <input type="text" name="social_links[{{ $i }}][url]" value="{{ $link->url }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="URL">
                 <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>

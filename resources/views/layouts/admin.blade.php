@@ -43,6 +43,11 @@
                     <i class="fas fa-chart-pie w-5"></i>
                     <span>Overview</span>
                 </a>
+
+                <a href="{{ route('admin.contact-messages.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg mb-2 {{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
+                    <i class="fas fa-inbox w-5 text-blue-400"></i>
+                    <span>Contact Inbox</span>
+                </a>
                 
                 <div class="mt-6">
                     <p class="px-4 text-xs text-slate-500 uppercase tracking-wider mb-3 font-semibold">Page Sections</p>
@@ -102,6 +107,27 @@
                         <i class="fas fa-grip-lines w-5 text-slate-400"></i>
                         <span>Footer</span>
                     </a>
+                </div>
+
+                <div class="mt-6">
+                    <p class="px-4 text-xs text-slate-500 uppercase tracking-wider mb-3 font-semibold">Portfolio</p>
+                    @php
+                        $portfolioLinks = [
+                            ['key' => 'services', 'icon' => 'briefcase', 'label' => 'Services'],
+                            ['key' => 'projects', 'icon' => 'folder-open', 'label' => 'Projects'],
+                            ['key' => 'case-studies', 'icon' => 'file-alt', 'label' => 'Case Studies'],
+                            ['key' => 'team', 'icon' => 'user-friends', 'label' => 'Team'],
+                            ['key' => 'testimonials', 'icon' => 'quote-left', 'label' => 'Testimonials'],
+                            ['key' => 'clients', 'icon' => 'building', 'label' => 'Clients'],
+                            ['key' => 'blog', 'icon' => 'newspaper', 'label' => 'Blog'],
+                        ];
+                    @endphp
+                    @foreach($portfolioLinks as $link)
+                        <a href="{{ route('admin.portfolio.index', $link['key']) }}" class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg mb-1 {{ request()->is('admin/portfolio/'.$link['key']) ? 'active' : '' }}">
+                            <i class="fas fa-{{ $link['icon'] }} w-5 text-slate-400"></i>
+                            <span>{{ $link['label'] }}</span>
+                        </a>
+                    @endforeach
                 </div>
             </nav>
             

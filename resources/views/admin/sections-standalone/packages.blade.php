@@ -59,6 +59,7 @@
         <div class="space-y-4" id="packages-container">
             @foreach($landingPage->packages?->packages ?? [] as $pIndex => $package)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="packages[{{ $pIndex }}][id]" value="{{ $package->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700 flex items-center gap-2">
                         <i class="fas fa-grip-vertical text-slate-400"></i>
@@ -84,7 +85,13 @@
                     <input type="number" name="packages[{{ $pIndex }}][price]" value="{{ $package->price }}" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Price">
                     <input type="text" name="packages[{{ $pIndex }}][button_text_en]" value="{{ $package->button_text_en }}" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Button Text EN">
                 </div>
-                <input type="text" name="packages[{{ $pIndex }}][button_text_ar]" value="{{ $package->button_text_ar }}" class="w-full border border-slate-300 rounded-lg px-3 py-2 mb-3" placeholder="Button Text AR" dir="rtl">
+                <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 mb-3">
+                    <input type="text" name="packages[{{ $pIndex }}][button_text_ar]" value="{{ $package->button_text_ar }}" class="w-full border border-slate-300 rounded-lg px-3 py-2" placeholder="Button Text AR" dir="rtl">
+                    <label class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700">
+                        <input type="checkbox" name="packages[{{ $pIndex }}][is_popular]" value="1" {{ $package->is_popular ? 'checked' : '' }}>
+                        Popular
+                    </label>
+                </div>
                 <div>
                     <label class="text-xs text-slate-500 mb-1 block flex items-center gap-1">
                         <i class="fas fa-list"></i>
@@ -121,7 +128,13 @@
                         <input type="number" name="packages[__INDEX__][price]" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Price">
                         <input type="text" name="packages[__INDEX__][button_text_en]" class="border border-slate-300 rounded-lg px-3 py-2" placeholder="Button Text EN">
                     </div>
-                    <input type="text" name="packages[__INDEX__][button_text_ar]" class="w-full border border-slate-300 rounded-lg px-3 py-2 mb-3" placeholder="Button Text AR" dir="rtl">
+                    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 mb-3">
+                        <input type="text" name="packages[__INDEX__][button_text_ar]" class="w-full border border-slate-300 rounded-lg px-3 py-2" placeholder="Button Text AR" dir="rtl">
+                        <label class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700">
+                            <input type="checkbox" name="packages[__INDEX__][is_popular]" value="1">
+                            Popular
+                        </label>
+                    </div>
                     <div>
                         <label class="text-xs text-slate-500 mb-1 block flex items-center gap-1">
                             <i class="fas fa-list"></i>

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LandingPage extends Model
 {
-    protected $fillable = ['slug', 'name', 'logo_text_en', 'logo_text_ar', 'is_announcement_active'];
+    protected $fillable = ['slug', 'name', 'logo_text_en', 'logo_text_ar', 'logo_image_path', 'is_announcement_active'];
 
     public function announcement()
     {
-        return $this->hasOne(Announcement::class)->where('is_active', true);
+        return $this->hasOne(Announcement::class);
     }
 
     public function hero()

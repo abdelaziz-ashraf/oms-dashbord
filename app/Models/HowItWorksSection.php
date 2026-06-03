@@ -8,7 +8,26 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class HowItWorksSection extends Model
 {
-    protected $fillable = ['landing_page_id', 'title_en', 'title_ar', 'description_en', 'description_ar', 'is_active'];
+    protected $fillable = [
+        'landing_page_id',
+        'eyebrow_en',
+        'eyebrow_ar',
+        'title_en',
+        'title_ar',
+        'description_en',
+        'description_ar',
+        'cta_title_en',
+        'cta_title_ar',
+        'cta_description_en',
+        'cta_description_ar',
+        'cta_button_text_en',
+        'cta_button_text_ar',
+        'cta_button_link',
+        'cta_secondary_button_text_en',
+        'cta_secondary_button_text_ar',
+        'cta_secondary_button_link',
+        'is_active',
+    ];
 
     public function landingPage(): BelongsTo
     {
@@ -18,15 +37,5 @@ class HowItWorksSection extends Model
     public function steps(): HasMany
     {
         return $this->hasMany(HowItWorksStep::class)->orderBy('order');
-    }
-}
-
-class HowItWorksStep extends Model
-{
-    protected $fillable = ['how_it_works_section_id', 'title_en', 'title_ar', 'description_en', 'description_ar', 'order'];
-
-    public function howItWorksSection(): BelongsTo
-    {
-        return $this->belongsTo(HowItWorksSection::class);
     }
 }

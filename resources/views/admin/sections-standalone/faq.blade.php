@@ -37,6 +37,7 @@
         <div class="space-y-4" id="faq-container">
             @foreach($section?->items ?? [] as $i => $item)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="items[{{ $i }}][id]" value="{{ $item->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700">Question {{ $i+1 }}</span>
                     <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>

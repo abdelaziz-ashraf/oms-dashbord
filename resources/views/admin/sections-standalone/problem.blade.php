@@ -48,6 +48,7 @@
         <div class="space-y-3" id="items-container">
             @foreach($landingPage->problem?->items ?? [] as $index => $item)
             <div class="flex gap-3 items-start p-3 bg-slate-50 rounded-xl item-item">
+                <input type="hidden" name="items[{{ $index }}][id]" value="{{ $item->id }}">
                 <input type="text" name="items[{{ $index }}][title_en]" value="{{ $item->title_en }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Title EN">
                 <input type="text" name="items[{{ $index }}][title_ar]" value="{{ $item->title_ar }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Title AR" dir="rtl">
                 <input type="text" name="items[{{ $index }}][description_en]" value="{{ $item->description_en }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Description EN">

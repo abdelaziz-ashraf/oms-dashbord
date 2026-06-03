@@ -20,12 +20,42 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (English)</label>
+            <input type="text" name="eyebrow_en" value="{{ $section?->eyebrow_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (Arabic)</label>
+            <input type="text" name="eyebrow_ar" value="{{ $section?->eyebrow_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
             <label class="block text-sm font-semibold text-slate-700">Title (English)</label>
             <input type="text" name="title_en" value="{{ $section?->title_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
         </div>
         <div class="space-y-2">
             <label class="block text-sm font-semibold text-slate-700">Title (Arabic)</label>
             <input type="text" name="title_ar" value="{{ $section?->title_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-6">
+        <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-play-circle text-slate-400"></i>
+            <h3 class="font-semibold text-slate-700">Section CTA</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+            <input type="text" name="cta_title_en" value="{{ $section?->cta_title_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="CTA Title EN">
+            <input type="text" name="cta_title_ar" value="{{ $section?->cta_title_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="CTA Title AR" dir="rtl">
+            <textarea name="cta_description_en" rows="3" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="CTA Description EN">{{ $section?->cta_description_en }}</textarea>
+            <textarea name="cta_description_ar" rows="3" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="CTA Description AR" dir="rtl">{{ $section?->cta_description_ar }}</textarea>
+            <input type="text" name="cta_button_text_en" value="{{ $section?->cta_button_text_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Primary Button EN">
+            <input type="text" name="cta_button_text_ar" value="{{ $section?->cta_button_text_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Primary Button AR" dir="rtl">
+            <input type="text" name="cta_button_link" value="{{ $section?->cta_button_link }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Primary Button Link">
+            <input type="text" name="cta_secondary_button_link" value="{{ $section?->cta_secondary_button_link }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Secondary Button Link">
+            <input type="text" name="cta_secondary_button_text_en" value="{{ $section?->cta_secondary_button_text_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Secondary Button EN">
+            <input type="text" name="cta_secondary_button_text_ar" value="{{ $section?->cta_secondary_button_text_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Secondary Button AR" dir="rtl">
         </div>
     </div>
     
@@ -37,6 +67,7 @@
         <div class="space-y-4" id="howitworks-container">
             @foreach($section?->steps ?? [] as $i => $step)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="steps[{{ $i }}][id]" value="{{ $step->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700 flex items-center gap-2">
                         <span class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm">{{ $i+1 }}</span>

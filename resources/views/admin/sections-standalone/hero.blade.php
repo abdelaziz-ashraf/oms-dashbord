@@ -88,6 +88,7 @@
         <div class="space-y-3" id="statistics-container">
             @foreach($landingPage->hero?->statistics ?? [] as $index => $stat)
             <div class="flex gap-3 items-center p-3 bg-slate-50 rounded-xl item-item">
+                <input type="hidden" name="statistics[{{ $index }}][id]" value="{{ $stat->id }}">
                 <input type="text" name="statistics[{{ $index }}][value]" value="{{ $stat->value }}" class="border border-slate-300 rounded-lg px-3 py-2 w-28" placeholder="10K+">
                 <input type="text" name="statistics[{{ $index }}][label_en]" value="{{ $stat->label_en }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Label EN">
                 <input type="text" name="statistics[{{ $index }}][label_ar]" value="{{ $stat->label_ar }}" class="border border-slate-300 rounded-lg px-3 py-2 flex-1" placeholder="Label AR">

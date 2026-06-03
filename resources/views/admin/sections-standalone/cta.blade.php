@@ -19,6 +19,17 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (English)</label>
+            <input type="text" name="eyebrow_en" value="{{ $landingPage->cta?->eyebrow_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (Arabic)</label>
+            <input type="text" name="eyebrow_ar" value="{{ $landingPage->cta?->eyebrow_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
             <label class="block text-sm font-semibold text-slate-700">Title (English)</label>
             <input type="text" name="title_en" value="{{ $landingPage->cta?->title_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
         </div>
@@ -52,6 +63,26 @@
             <label class="block text-sm font-semibold text-slate-700">Button Link</label>
             <input type="text" name="button_link" value="{{ $landingPage->cta?->button_link }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" placeholder="#packages">
         </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Secondary Button Text (English)</label>
+            <input type="text" name="secondary_button_text_en" value="{{ $landingPage->cta?->secondary_button_text_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Secondary Button Text (Arabic)</label>
+            <input type="text" name="secondary_button_text_ar" value="{{ $landingPage->cta?->secondary_button_text_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Secondary Button Link</label>
+            <input type="text" name="secondary_button_link" value="{{ $landingPage->cta?->secondary_button_link }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+        </div>
+    </div>
+
+    <div class="space-y-2">
+        <label class="block text-sm font-semibold text-slate-700">Badges (one per line - EN | AR)</label>
+        <textarea name="badges_text" rows="4" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">{{ collect($landingPage->cta?->badges ?? [])->map(fn($badge) => ($badge['text_en'] ?? '') . ' | ' . ($badge['text_ar'] ?? ''))->join("\n") }}</textarea>
     </div>
     
     <div class="flex justify-end pt-4 border-t border-slate-100">

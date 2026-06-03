@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class FaqSection extends Model
 {
-    protected $fillable = ['landing_page_id', 'title_en', 'title_ar', 'description_en', 'description_ar', 'is_active'];
+    protected $fillable = ['landing_page_id', 'eyebrow_en', 'eyebrow_ar', 'title_en', 'title_ar', 'description_en', 'description_ar', 'is_active'];
 
     public function landingPage(): BelongsTo
     {
@@ -18,15 +18,5 @@ class FaqSection extends Model
     public function items(): HasMany
     {
         return $this->hasMany(FaqItem::class)->orderBy('order');
-    }
-}
-
-class FaqItem extends Model
-{
-    protected $fillable = ['faq_section_id', 'question_en', 'question_ar', 'answer_en', 'answer_ar', 'order'];
-
-    public function faqSection(): BelongsTo
-    {
-        return $this->belongsTo(FaqSection::class);
     }
 }

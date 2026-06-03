@@ -20,6 +20,17 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (English)</label>
+            <input type="text" name="eyebrow_en" value="{{ $section?->eyebrow_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (Arabic)</label>
+            <input type="text" name="eyebrow_ar" value="{{ $section?->eyebrow_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
             <label class="block text-sm font-semibold text-slate-700">Title (English)</label>
             <input type="text" name="title_en" value="{{ $section?->title_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
         </div>
@@ -27,6 +38,17 @@
             <label class="block text-sm font-semibold text-slate-700">Title (Arabic)</label>
             <input type="text" name="title_ar" value="{{ $section?->title_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
         </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="text" name="before_title_en" value="{{ $section?->before_title_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Before Title EN">
+        <input type="text" name="before_title_ar" value="{{ $section?->before_title_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Before Title AR" dir="rtl">
+        <input type="text" name="before_subtitle_en" value="{{ $section?->before_subtitle_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Before Subtitle EN">
+        <input type="text" name="before_subtitle_ar" value="{{ $section?->before_subtitle_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Before Subtitle AR" dir="rtl">
+        <input type="text" name="after_title_en" value="{{ $section?->after_title_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="After Title EN">
+        <input type="text" name="after_title_ar" value="{{ $section?->after_title_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="After Title AR" dir="rtl">
+        <input type="text" name="after_subtitle_en" value="{{ $section?->after_subtitle_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="After Subtitle EN">
+        <input type="text" name="after_subtitle_ar" value="{{ $section?->after_subtitle_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="After Subtitle AR" dir="rtl">
     </div>
     
     <div class="border-t border-slate-200 pt-6">
@@ -37,6 +59,7 @@
         <div class="space-y-4" id="comparison-container">
             @foreach($section?->items ?? [] as $i => $item)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="items[{{ $i }}][id]" value="{{ $item->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700">Item {{ $i+1 }}</span>
                     <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>

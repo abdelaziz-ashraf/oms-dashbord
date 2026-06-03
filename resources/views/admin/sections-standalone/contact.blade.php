@@ -20,12 +20,71 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (English)</label>
+            <input type="text" name="eyebrow_en" value="{{ $section?->eyebrow_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Eyebrow (Arabic)</label>
+            <input type="text" name="eyebrow_ar" value="{{ $section?->eyebrow_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
             <label class="block text-sm font-semibold text-slate-700">Title (English)</label>
             <input type="text" name="title_en" value="{{ $section?->title_en }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">
         </div>
         <div class="space-y-2">
             <label class="block text-sm font-semibold text-slate-700">Title (Arabic)</label>
             <input type="text" name="title_ar" value="{{ $section?->title_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Description (English)</label>
+            <textarea name="description_en" rows="3" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">{{ $section?->description_en }}</textarea>
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Description (Arabic)</label>
+            <textarea name="description_ar" rows="3" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">{{ $section?->description_ar }}</textarea>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-6">
+        <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-paper-plane text-slate-400"></i>
+            <h3 class="font-semibold text-slate-700">Lead Form Text</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="text" name="form_title_en" value="{{ $section?->form_title_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Form Title EN">
+            <input type="text" name="form_title_ar" value="{{ $section?->form_title_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Form Title AR" dir="rtl">
+            <textarea name="form_description_en" rows="3" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Form Description EN">{{ $section?->form_description_en }}</textarea>
+            <textarea name="form_description_ar" rows="3" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Form Description AR" dir="rtl">{{ $section?->form_description_ar }}</textarea>
+            <input type="text" name="form_button_text_en" value="{{ $section?->form_button_text_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Button EN">
+            <input type="text" name="form_button_text_ar" value="{{ $section?->form_button_text_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Button AR" dir="rtl">
+            <input type="text" name="form_success_text_en" value="{{ $section?->form_success_text_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Success EN">
+            <input type="text" name="form_success_text_ar" value="{{ $section?->form_success_text_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Success AR" dir="rtl">
+            <input type="text" name="form_error_text_en" value="{{ $section?->form_error_text_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Error EN">
+            <input type="text" name="form_error_text_ar" value="{{ $section?->form_error_text_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Error AR" dir="rtl">
+            <input type="text" name="form_sending_text_en" value="{{ $section?->form_sending_text_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Sending EN">
+            <input type="text" name="form_sending_text_ar" value="{{ $section?->form_sending_text_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Sending AR" dir="rtl">
+            <input type="text" name="form_name_label_en" value="{{ $section?->form_name_label_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Name Label EN">
+            <input type="text" name="form_name_label_ar" value="{{ $section?->form_name_label_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Name Label AR" dir="rtl">
+            <input type="text" name="form_name_placeholder_en" value="{{ $section?->form_name_placeholder_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Name Placeholder EN">
+            <input type="text" name="form_name_placeholder_ar" value="{{ $section?->form_name_placeholder_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Name Placeholder AR" dir="rtl">
+            <input type="text" name="form_email_label_en" value="{{ $section?->form_email_label_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Email Label EN">
+            <input type="text" name="form_email_label_ar" value="{{ $section?->form_email_label_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Email Label AR" dir="rtl">
+            <input type="text" name="form_email_placeholder_en" value="{{ $section?->form_email_placeholder_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Email Placeholder EN">
+            <input type="text" name="form_email_placeholder_ar" value="{{ $section?->form_email_placeholder_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Email Placeholder AR" dir="rtl">
+            <input type="text" name="form_company_label_en" value="{{ $section?->form_company_label_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Company Label EN">
+            <input type="text" name="form_company_label_ar" value="{{ $section?->form_company_label_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Company Label AR" dir="rtl">
+            <input type="text" name="form_company_placeholder_en" value="{{ $section?->form_company_placeholder_en }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Company Placeholder EN">
+            <input type="text" name="form_company_placeholder_ar" value="{{ $section?->form_company_placeholder_ar }}" class="border border-slate-300 rounded-xl px-4 py-3" placeholder="Company Placeholder AR" dir="rtl">
+        </div>
+        <div class="space-y-2 mt-4">
+            <label class="block text-sm font-semibold text-slate-700">Form Badges (one per line - EN | AR)</label>
+            <textarea name="form_badges_text" rows="4" class="w-full border border-slate-300 rounded-xl px-4 py-3">{{ collect($section?->form_badges ?? [])->map(fn($badge) => ($badge['text_en'] ?? '') . ' | ' . ($badge['text_ar'] ?? ''))->join("\n") }}</textarea>
         </div>
     </div>
     
@@ -37,6 +96,7 @@
         <div class="space-y-4 items-container" id="contact-container">
             @foreach($section?->items ?? [] as $i => $item)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="items[{{ $i }}][id]" value="{{ $item->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700">Item {{ $i+1 }}</span>
                     <button type="button" class="remove-item-btn text-red-500 hover:bg-red-50 p-2 rounded-lg"><i class="fas fa-trash"></i></button>

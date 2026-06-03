@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SocialProof extends Model
 {
-    protected $fillable = ['landing_page_id', 'title_en', 'title_ar', 'description_en', 'description_ar', 'is_active'];
+    protected $fillable = ['landing_page_id', 'eyebrow_en', 'eyebrow_ar', 'title_en', 'title_ar', 'description_en', 'description_ar', 'is_active'];
 
     public function landingPage(): BelongsTo
     {
@@ -18,15 +18,5 @@ class SocialProof extends Model
     public function items(): HasMany
     {
         return $this->hasMany(SocialProofItem::class)->orderBy('order');
-    }
-}
-
-class SocialProofItem extends Model
-{
-    protected $fillable = ['social_proof_id', 'company', 'metric', 'quote_en', 'quote_ar', 'order'];
-
-    public function socialProof(): BelongsTo
-    {
-        return $this->belongsTo(SocialProof::class);
     }
 }

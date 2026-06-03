@@ -25,13 +25,3 @@ class HeroSection extends Model
         return $this->hasMany(HeroStatistic::class)->orderBy('order');
     }
 }
-
-class HeroStatistic extends Model
-{
-    protected $fillable = ['hero_section_id', 'value', 'label_en', 'label_ar', 'order'];
-
-    public function heroSection(): BelongsTo
-    {
-        return $this->belongsTo(HeroSection::class);
-    }
-}

@@ -48,6 +48,7 @@
         <div class="space-y-4 items-container" id="features-container">
             @foreach($landingPage->features?->features ?? [] as $index => $feature)
             <div class="p-5 bg-slate-50 rounded-xl border border-slate-200 item-item">
+                <input type="hidden" name="features[{{ $index }}][id]" value="{{ $feature->id }}">
                 <div class="flex justify-between items-center mb-4">
                     <span class="font-semibold text-slate-700 flex items-center gap-2">
                         <i class="fas fa-grip-vertical text-slate-400"></i>
