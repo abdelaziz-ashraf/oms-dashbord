@@ -14,6 +14,10 @@ class ContactMessage extends Model
         'email',
         'phone',
         'company',
+        'industry',
+        'job_title',
+        'company_size',
+        'improvements',
         'subject',
         'message',
         'locale',
@@ -25,6 +29,7 @@ class ContactMessage extends Model
     protected function casts(): array
     {
         return [
+            'improvements' => 'array',
             'read_at' => 'datetime',
         ];
     }
