@@ -47,6 +47,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/admin/contact-messages/{contactMessage}/status', [ContactMessageController::class, 'updateStatus'])->name('admin.contact-messages.status');
     Route::delete('/admin/contact-messages/{contactMessage}', [ContactMessageController::class, 'destroy'])->name('admin.contact-messages.destroy');
 
+    Route::get('/admin/demo-requests', [ContactMessageController::class, 'demoIndex'])->name('admin.demo-requests.index');
+    Route::get('/admin/demo-requests/export', [ContactMessageController::class, 'demoExport'])->name('admin.demo-requests.export');
+    Route::get('/admin/demo-requests/{contactMessage}', [ContactMessageController::class, 'demoShow'])->name('admin.demo-requests.show');
+    Route::patch('/admin/demo-requests/{contactMessage}/status', [ContactMessageController::class, 'updateStatus'])->name('admin.demo-requests.status');
+    Route::delete('/admin/demo-requests/{contactMessage}', [ContactMessageController::class, 'demoDestroy'])->name('admin.demo-requests.destroy');
+
     Route::get('/admin/portfolio/{module}', [PortfolioController::class, 'index'])->name('admin.portfolio.index');
     Route::put('/admin/portfolio/{module}/settings', [PortfolioController::class, 'updateSettings'])->name('admin.portfolio.settings');
     Route::post('/admin/portfolio/{module}', [PortfolioController::class, 'store'])->name('admin.portfolio.store');

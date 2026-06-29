@@ -48,6 +48,15 @@
                     <i class="fas fa-inbox w-5 text-blue-400"></i>
                     <span>Contact Inbox</span>
                 </a>
+
+                <a href="{{ route('admin.demo-requests.index') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg mb-2 {{ request()->routeIs('admin.demo-requests.*') ? 'active' : '' }}">
+                    <i class="fas fa-rocket w-5 text-orange-400"></i>
+                    <span>Demo Requests</span>
+                    @php $newDemoCount = \App\Models\ContactMessage::where('source','demo_request')->where('status','new')->count(); @endphp
+                    @if($newDemoCount > 0)
+                        <span class="ms-auto bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{{ $newDemoCount }}</span>
+                    @endif
+                </a>
                 
                 <div class="mt-6">
                     <p class="px-4 text-xs text-slate-500 uppercase tracking-wider mb-3 font-semibold">Page Sections</p>

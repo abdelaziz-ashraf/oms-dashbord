@@ -116,12 +116,94 @@ class ContactMessageController extends Controller
             ->with('success', 'Message deleted.');
     }
 
+    public function demoIndex(Request $request): View
+    {
+        $status = $request->query('status');
+        $search = $request->query('search');
+
+        $messages = $this->filteredDemoRequests($request)
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        $counts = ContactMessage::query()
+            ->where('source', 'demo_request')
+            ->selectRaw('status, count(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status');
+
+        $total = ContactMessage::where('source', 'demo_request')->count();
+
+        return view('admin.demo-requests.index', compact('messages', 'counts', 'status', 'search', 'total'));
+    }
+
+    public function demoExport(Request $request): StreamedResponse
+    {
+        $filename = 'demo-requests-'.now()->format('Ymd-His').'.csv';
+
+        return response()->streamDownload(function () use ($request) {
+            $output = fopen('php://output', 'w');
+            fputcsv($output, [
+                'ID', 'Status', 'Name', 'Email', 'Phone', 'Company',
+                'Industry', 'Job Title', 'Company Size', 'Improvements',
+                'Locale', 'Received At',
+            ]);
+
+            $this->filteredDemoRequests($request)
+                ->oldest()
+                ->chunk(200, function ($messages) use ($output) {
+                    foreach ($messages as $message) {
+                        fputcsv($output, [
+                            $message->id,
+                            $message->status,
+                            $message->full_name,
+                            $message->email,
+                            $message->phone,
+                            $message->company,
+                            $message->industry,
+                            $message->job_title,
+                            $message->company_size,
+                            implode(', ', $message->improvements ?? []),
+                            $message->locale,
+                            optional($message->created_at)->toDateTimeString(),
+                        ]);
+                    }
+                });
+
+            fclose($output);
+        }, $filename, ['Content-Type' => 'text/csv']);
+    }
+
+    public function demoShow(ContactMessage $contactMessage): View
+    {
+        abort_unless($contactMessage->source === 'demo_request', 404);
+
+        if (!$contactMessage->read_at) {
+            $contactMessage->forceFill([
+                'read_at' => now(),
+                'status' => $contactMessage->status === 'new' ? 'read' : $contactMessage->status,
+            ])->save();
+        }
+
+        return view('admin.demo-requests.show', compact('contactMessage'));
+    }
+
+    public function demoDestroy(ContactMessage $contactMessage): RedirectResponse
+    {
+        abort_unless($contactMessage->source === 'demo_request', 404);
+        $contactMessage->delete();
+
+        return redirect()->route('admin.demo-requests.index')
+            ->with('success', 'Demo request deleted.');
+    }
+
     private function filteredMessages(Request $request)
     {
         $status = $request->query('status');
         $search = $request->query('search');
 
         return ContactMessage::query()
+            ->where('source', '!=', 'demo_request')
             ->when($status, fn ($query) => $query->where('status', $status))
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
@@ -130,6 +212,25 @@ class ContactMessageController extends Controller
                         ->orWhere('company', 'like', "%{$search}%")
                         ->orWhere('subject', 'like', "%{$search}%")
                         ->orWhere('message', 'like', "%{$search}%");
+                });
+            });
+    }
+
+    private function filteredDemoRequests(Request $request)
+    {
+        $status = $request->query('status');
+        $search = $request->query('search');
+
+        return ContactMessage::query()
+            ->where('source', 'demo_request')
+            ->when($status, fn ($query) => $query->where('status', $status))
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('full_name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('company', 'like', "%{$search}%")
+                        ->orWhere('industry', 'like', "%{$search}%")
+                        ->orWhere('job_title', 'like', "%{$search}%");
                 });
             });
     }
