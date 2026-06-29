@@ -213,6 +213,7 @@ class SectionRequest extends FormRequest
             'form_company_label_ar' => ['nullable', 'string'],
             'form_company_placeholder_en' => ['nullable', 'string'],
             'form_company_placeholder_ar' => ['nullable', 'string'],
+            'whatsapp_number' => ['nullable', 'string', 'max:32'],
             'form_badges_text' => ['nullable', 'string'],
             'items' => ['nullable', 'array'],
             'items.*.id' => ['nullable', 'integer'],
