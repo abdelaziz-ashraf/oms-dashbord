@@ -80,6 +80,7 @@ class LandingPageResource extends JsonResource
             'secondary_button_link' => $hero->secondary_button_link,
             'trusted_badge_en' => $hero->trusted_badge_en,
             'trusted_badge_ar' => $hero->trusted_badge_ar,
+            'image_url' => $hero->image_path ? $this->mediaUrl($hero->image_path) : null,
             'statistics' => $hero->statistics->map(fn ($stat) => [
                 'id' => $stat->id,
                 'value' => $stat->value,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SectionRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Announcement;
 use App\Models\ComparisonSection;
 use App\Models\ContactSection;
@@ -62,14 +63,25 @@ class SectionController extends Controller
     {
         DB::transaction(function () use ($request) {
             $page = $this->getLandingPage();
+
+            $payload = $this->sectionPayload($request, [
+                'title_en', 'title_ar', 'subtitle_en', 'subtitle_ar',
+                'button_text_en', 'button_text_ar', 'button_link',
+                'secondary_button_text_en', 'secondary_button_text_ar',
+                'secondary_button_link', 'trusted_badge_en', 'trusted_badge_ar',
+            ]);
+
+            if ($request->hasFile('image')) {
+                $existing = HeroSection::where('landing_page_id', $page->id)->first();
+                if ($existing?->image_path) {
+                    Storage::disk('public')->delete($existing->image_path);
+                }
+                $payload['image_path'] = $request->file('image')->store('hero', 'public');
+            }
+
             $hero = HeroSection::updateOrCreate(
                 ['landing_page_id' => $page->id],
-                $this->sectionPayload($request, [
-                    'title_en', 'title_ar', 'subtitle_en', 'subtitle_ar',
-                    'button_text_en', 'button_text_ar', 'button_link',
-                    'secondary_button_text_en', 'secondary_button_text_ar',
-                    'secondary_button_link', 'trusted_badge_en', 'trusted_badge_ar',
-                ])
+                $payload
             );
 
             $this->syncChildren(

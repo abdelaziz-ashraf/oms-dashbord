@@ -1,4 +1,4 @@
-<form action="{{ route('admin.hero.update') }}" method="POST" class="space-y-8">
+<form action="{{ route('admin.hero.update') }}" method="POST" class="space-y-8" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     
@@ -81,6 +81,34 @@
     </div>
     
     <div class="border-t border-slate-200 pt-6">
+        <div class="flex items-center gap-2 mb-1">
+            <i class="fas fa-image text-slate-400"></i>
+            <h3 class="font-semibold text-slate-700">Hero Image</h3>
+        </div>
+        <p class="text-xs text-slate-400 mb-4">Replaces the dark statistics card on the right side of the hero. Max 5 MB. Leave empty to keep the current image.</p>
+
+        @if($landingPage->hero?->image_path)
+        <div class="mb-4">
+            <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($landingPage->hero->image_path) }}"
+                 alt="Hero image" class="h-40 rounded-xl object-cover border border-slate-200 shadow-sm">
+        </div>
+        @endif
+
+        <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition-colors"
+               id="image-drop-zone">
+            <i class="fas fa-cloud-upload-alt text-2xl text-slate-400 mb-2"></i>
+            <span class="text-sm text-slate-500">Click to upload or drag & drop</span>
+            <span class="text-xs text-slate-400 mt-1">PNG, JPG, WEBP</span>
+            <input type="file" name="image" accept="image/*" class="hidden" id="hero-image-input"
+                   onchange="previewHeroImage(this)">
+        </label>
+        <div id="hero-image-preview" class="mt-3 hidden">
+            <img id="hero-preview-img" src="" alt="" class="h-40 rounded-xl object-cover border border-slate-200 shadow-sm">
+            <p class="text-xs text-slate-400 mt-1" id="hero-image-name"></p>
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-6">
         <div class="flex items-center gap-2 mb-4">
             <i class="fas fa-chart-bar text-slate-400"></i>
             <h3 class="font-semibold text-slate-700">Statistics</h3>
@@ -120,3 +148,33 @@
         </button>
     </div>
 </form>
+
+<script>
+function previewHeroImage(input) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('hero-preview-img').src = e.target.result;
+        document.getElementById('hero-image-name').textContent = file.name;
+        document.getElementById('hero-image-preview').classList.remove('hidden');
+    };
+    reader.readAsDataURL(file);
+}
+
+// Drag & drop
+const dropZone = document.getElementById('image-drop-zone');
+const fileInput = document.getElementById('hero-image-input');
+if (dropZone) {
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('border-blue-400', 'bg-blue-50/50'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-blue-400', 'bg-blue-50/50'));
+    dropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropZone.classList.remove('border-blue-400', 'bg-blue-50/50');
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            previewHeroImage(fileInput);
+        }
+    });
+}
+</script>

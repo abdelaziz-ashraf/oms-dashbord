@@ -12,7 +12,7 @@ class HeroSection extends Model
         'landing_page_id', 'title_en', 'title_ar', 'subtitle_en', 'subtitle_ar',
         'button_text_en', 'button_text_ar', 'button_link',
         'secondary_button_text_en', 'secondary_button_text_ar', 'secondary_button_link',
-        'trusted_badge_en', 'trusted_badge_ar', 'is_active'
+        'trusted_badge_en', 'trusted_badge_ar', 'image_path', 'is_active'
     ];
 
     public function landingPage(): BelongsTo

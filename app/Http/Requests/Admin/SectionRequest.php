@@ -82,6 +82,7 @@ class SectionRequest extends FormRequest
     private function heroRules(): array
     {
         return [
+            'image' => ['nullable', 'image', 'max:5120'],
             'title_en' => ['required', 'string'],
             'title_ar' => ['required', 'string'],
             'subtitle_en' => ['required', 'string'],
