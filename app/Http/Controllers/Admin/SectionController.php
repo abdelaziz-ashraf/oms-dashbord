@@ -279,6 +279,7 @@ class SectionController extends Controller
                 'form_email_label_en', 'form_email_label_ar', 'form_email_placeholder_en',
                 'form_email_placeholder_ar', 'form_company_label_en', 'form_company_label_ar',
                 'form_company_placeholder_en', 'form_company_placeholder_ar',
+                'whatsapp_number',
             ]);
 
             $section->forceFill([

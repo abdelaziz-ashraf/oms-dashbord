@@ -42,6 +42,7 @@ class ContactSection extends Model
         'form_company_placeholder_ar',
         'form_badges',
         'is_active',
+        'whatsapp_number',
     ];
 
     protected $casts = [

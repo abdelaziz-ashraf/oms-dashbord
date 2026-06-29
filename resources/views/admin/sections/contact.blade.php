@@ -15,6 +15,10 @@
             <div><label class="block text-sm font-medium mb-1">Title (AR)</label><input type="text" name="title_ar" value="{{ $section?->title_ar }}" class="w-full border rounded-lg px-3 py-2"></div>
         </div>
         <div class="border-t pt-4">
+            <h3 class="font-medium mb-3">WhatsApp Float Button</h3>
+            <input type="text" name="whatsapp_number" value="{{ $section?->whatsapp_number }}" class="w-full border rounded-lg px-3 py-2 mb-4" placeholder="WhatsApp number e.g. +966501234567">
+        </div>
+        <div class="border-t pt-4">
             <h3 class="font-medium mb-3">Contact Info</h3>
             <div class="space-y-3" id="contact-container">
                 @foreach($section?->items ?? [] as $i => $item)

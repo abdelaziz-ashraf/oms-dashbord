@@ -90,6 +90,18 @@
     
     <div class="border-t border-slate-200 pt-6">
         <div class="flex items-center gap-2 mb-4">
+            <i class="fab fa-whatsapp text-slate-400"></i>
+            <h3 class="font-semibold text-slate-700">WhatsApp Float Button</h3>
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">WhatsApp Number</label>
+            <p class="text-xs text-slate-500">Include country code. Leave empty to hide the float button.</p>
+            <input type="text" name="whatsapp_number" value="{{ $section?->whatsapp_number }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" placeholder="+966501234567">
+        </div>
+    </div>
+
+    <div class="border-t border-slate-200 pt-6">
+        <div class="flex items-center gap-2 mb-4">
             <i class="fas fa-address-card text-slate-400"></i>
             <h3 class="font-semibold text-slate-700">Contact Info</h3>
         </div>

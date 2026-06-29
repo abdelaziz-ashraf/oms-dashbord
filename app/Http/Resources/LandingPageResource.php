@@ -242,6 +242,8 @@ class LandingPageResource extends JsonResource
         }
 
         $base['form_badges'] = $section->form_badges ?? [];
+        $base['whatsapp_number'] = $section->whatsapp_number;
+        $base['whatsapp_url'] = $this->whatsappUrl($section->whatsapp_number);
 
         return $base;
     }
