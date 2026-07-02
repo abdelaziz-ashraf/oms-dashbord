@@ -16,6 +16,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Serve public storage files through PHP when symlink() is disabled on the host.
+// Skipped automatically when a real public/storage symlink exists.
+Route::get('/storage/{path}', [SystemController::class, 'serveStorage'])
+    ->where('path', '.*')
+    ->name('storage.serve');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
