@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\LandingPageController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\SystemController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -52,6 +53,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/demo-requests/{contactMessage}', [ContactMessageController::class, 'demoShow'])->name('admin.demo-requests.show');
     Route::patch('/admin/demo-requests/{contactMessage}/status', [ContactMessageController::class, 'updateStatus'])->name('admin.demo-requests.status');
     Route::delete('/admin/demo-requests/{contactMessage}', [ContactMessageController::class, 'demoDestroy'])->name('admin.demo-requests.destroy');
+
+    Route::get('/admin/storage-link', [SystemController::class, 'storageLink'])->name('admin.storage-link');
 
     Route::get('/admin/portfolio/{module}', [PortfolioController::class, 'index'])->name('admin.portfolio.index');
     Route::put('/admin/portfolio/{module}/settings', [PortfolioController::class, 'updateSettings'])->name('admin.portfolio.settings');
