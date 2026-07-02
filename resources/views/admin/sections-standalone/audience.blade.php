@@ -32,7 +32,18 @@ $items = $section?->items ?? collect();
             <input type="text" name="title_ar" value="{{ $section?->title_ar }}" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">
         </div>
     </div>
-    
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Description (English)</label>
+            <textarea name="description_en" rows="3" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition">{{ $section?->description_en }}</textarea>
+        </div>
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-slate-700">Description (Arabic)</label>
+            <textarea name="description_ar" rows="3" class="w-full border border-slate-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition" dir="rtl">{{ $section?->description_ar }}</textarea>
+        </div>
+    </div>
+
     <div class="border-t border-slate-200 pt-6">
         <div class="flex items-center gap-2 mb-4">
             <i class="fas fa-user-circle text-slate-400"></i>
