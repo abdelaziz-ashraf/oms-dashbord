@@ -3,11 +3,38 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\HeroSection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class SystemController extends Controller
 {
+    /**
+     * Diagnostics for public storage serving. Visit while logged in to see
+     * whether uploaded files exist on disk and what URLs are generated.
+     */
+    public function storageStatus(): JsonResponse
+    {
+        $hero = HeroSection::whereNotNull('image_path')->latest('id')->first();
+
+        $heroInfo = null;
+        if ($hero) {
+            $heroInfo = [
+                'image_path' => $hero->image_path,
+                'exists_on_disk' => Storage::disk('public')->exists($hero->image_path),
+                'generated_url' => Storage::disk('public')->url($hero->image_path),
+            ];
+        }
+
+        return response()->json([
+            'app_url' => config('app.url'),
+            'public_disk_root' => storage_path('app/public'),
+            'public_storage_symlink' => is_link(public_path('storage')),
+            'hero_image' => $heroInfo,
+        ], options: JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    }
+
     /**
      * Create the public/storage -> storage/app/public symlink.
      * Useful on shared hosting where the `php artisan storage:link`

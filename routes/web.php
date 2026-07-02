@@ -61,6 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/admin/demo-requests/{contactMessage}', [ContactMessageController::class, 'demoDestroy'])->name('admin.demo-requests.destroy');
 
     Route::get('/admin/storage-link', [SystemController::class, 'storageLink'])->name('admin.storage-link');
+    Route::get('/admin/storage-status', [SystemController::class, 'storageStatus'])->name('admin.storage-status');
 
     Route::get('/admin/portfolio/{module}', [PortfolioController::class, 'index'])->name('admin.portfolio.index');
     Route::put('/admin/portfolio/{module}/settings', [PortfolioController::class, 'updateSettings'])->name('admin.portfolio.settings');
